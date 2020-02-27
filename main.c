@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "/usr/local/include/mlx.h"
 
 void	draw_line(t_arg *param)
 {
@@ -31,7 +30,7 @@ void	draw_line(t_arg *param)
 		i = 0;
 		while(i < param->point[1].x - param->point[0].x)
 		{
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, x + i, y + j, 3232532 + x + y);
+			mlx_pixel_put(param->mlx_ptr, param->win_ptr, x + i, y + j, 3232532 + i);
 			i++;
 		}
 		j++;
@@ -65,6 +64,24 @@ int	draw_box(int button,int x,int y, t_arg *param)
 	return(0);
 }  
 
+int key_bindings(int button, t_arg *param)
+{
+	printf("keyboard button %d\n", button);
+	if (button == 49)
+	{
+		param->point[0].x = 0;
+		param->point[0].y = 0;
+		param->point[1].x = 0;
+		param->point[1].y = 0;
+	
+	}
+	if (button == 53)
+       mlx_destroy_window (param->mlx_ptr, param->win_ptr);
+	if (button == 8)
+		mlx_clear_window (param->mlx_ptr, param->win_ptr);
+	return(0);
+}
+
 int main()
 {
 	t_arg *mlw_win;
@@ -73,5 +90,6 @@ int main()
 	mlw_win->mlx_ptr = mlx_init();
 	mlw_win->win_ptr = mlx_new_window(mlw_win->mlx_ptr, 500, 500, "fdf");
 	mlx_mouse_hook(mlw_win->win_ptr, draw_box, mlw_win);
+	mlx_key_hook(mlw_win->win_ptr, key_bindings, mlw_win);
 	mlx_loop(mlw_win->mlx_ptr);
 }
