@@ -18,12 +18,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-typedef struct		f_list
-{
-	void			*mlx_ptr;
-	void			*win_ptr;
-}					t_arg;
-
 typedef struct		s_list
 {
 	int				y;
@@ -31,5 +25,13 @@ typedef struct		s_list
 	int				z;
 	double			colour;
 }					t_list;
+
+typedef struct		f_list
+{
+	void			*mlx_ptr;
+	void			*win_ptr;
+	t_list			point[2];
+}					t_arg;
+
 
 #endif
