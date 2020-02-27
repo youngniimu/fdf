@@ -29,10 +29,10 @@
 			while (j < 100)
 			{
 			
-				mlx_pixel_put(param->mlx_ptr, param->win_ptr, i + x, y + j, 255);
-				j++;
+				mlx_string_put(param->mlx_ptr, param->win_ptr, i + x, y + j, 25524442 + i + j, "HELLO");
+				j+= 20;
 			}
-			i++;
+			i+=20;
 		}
 	}
 	return(0);
@@ -47,7 +47,6 @@ int main()
 	mlw_win = (t_arg*)malloc(sizeof(t_arg*));
 	mlw_win->mlx_ptr = mlx_init();
 	mlw_win->win_ptr = mlx_new_window(mlw_win->mlx_ptr, 500, 500, "fdf");
-	mlx_string_put(mlw_win->mlx_ptr, mlw_win->win_ptr, 0, 0, 25524442 , "HELLO");
 	mlx_mouse_hook(mlw_win->win_ptr, draw_box, mlw_win);
 	mlx_loop(mlw_win->mlx_ptr);
 }
