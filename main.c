@@ -13,34 +13,41 @@
 #include "fdf.h"
 #include "/usr/local/include/mlx.h"
  
- int	draw_box(int key, void *param)
+ int	draw_box(int button,int x,int y, t_arg *param)
 {
-	int y;
-	int x;
-
-	y = 0;
-	while (y < 100)
+	if (button == 1)
 	{
-		x = 0;
-		while (x < 100)
+		int i;
+		int j;
+
+
+		i = 0;
+		
+		while (i < 100)
 		{
-			mlx_pixel_put(mlx_ptr, win_ptr, y, x, 255);
-			x++;
+			j = 0;
+			while (j < 100)
+			{
+			
+				mlx_pixel_put(param->mlx_ptr, param->win_ptr, i + x, y + j, 255);
+				j++;
+			}
+			i++;
 		}
-		y++;
 	}
-	return (0);
+	return(0);
 }  
 
 int main()
 {
-	void *mlx_ptr;
-	void *win_ptr;
+	t_arg *mlw_win;
+//	void *mlx_ptr;
+//	void *win_ptr;
 
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "fdf");
-	mlx_string_put(mlx_ptr, win_ptr, 0, 0, 25524442 , "HELLO");
-	mlx_mouse_hook(win_ptr, draw_box, (void *)0);
-
-	mlx_loop(mlx_ptr);
+	mlw_win = (t_arg*)malloc(sizeof(t_arg*));
+	mlw_win->mlx_ptr = mlx_init();
+	mlw_win->win_ptr = mlx_new_window(mlw_win->mlx_ptr, 500, 500, "fdf");
+	mlx_string_put(mlw_win->mlx_ptr, mlw_win->win_ptr, 0, 0, 25524442 , "HELLO");
+	mlx_mouse_hook(mlw_win->win_ptr, draw_box, mlw_win);
+	mlx_loop(mlw_win->mlx_ptr);
 }

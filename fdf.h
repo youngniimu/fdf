@@ -15,6 +15,14 @@
 
 # include "/usr/local/include/mlx.h"
 # include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+
+typedef struct		f_list
+{
+	void			*mlx_ptr;
+	void			*win_ptr;
+}					t_arg;
 
 typedef struct		s_list
 {
