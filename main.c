@@ -50,13 +50,17 @@ void	draw_line(t_arg *param)
 			param->point[0].x++;
 		}
 	}
-	/* STEEP LINE */
+	/* STEEP LINE - DOES NOT WORK AT ALL*/
 	else if (slope > 1)
 	{
 		y = param->point[0].y;
+		slope = 1 / slope; // PROBLEMS, SHADY
+		printf("%f\n", slope);
+
 		while(param->point[0].y < param->point[1].y)
 		{
-			
+			mlx_pixel_put(param->mlx_ptr, param->win_ptr, slope * (param->point[0].y - y) + param->point[0].y, param->point[0].x, 255);
+			y++;
 		}
 	}
 	printf("%f\n", slope);
