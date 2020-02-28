@@ -20,10 +20,10 @@
 
 typedef struct		s_list
 {
-	int				y;
-	int				x;
-	int				z;
-	double			colour;
+	float				y;
+	float				x;
+	float				z;
+	float				colour;
 }					t_list;
 
 typedef struct		f_list
@@ -31,6 +31,7 @@ typedef struct		f_list
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_list			point[2];
+	int				count;
 }					t_arg;
 
 
