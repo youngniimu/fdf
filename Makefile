@@ -24,7 +24,7 @@ all: $(NAME)
 
 $(NAME):
 	gcc $(FLAGS) -c $(SRC)
-	gcc -o $(NAME) $(OBJECTS) -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+	gcc -o $(NAME) $(OBJECTS) -L /Users/niimu/Documents/code/MinilibX -lmlx -framework OpenGL -framework AppKit
 
 clean:
 	@rm -f $(OBJECTS)

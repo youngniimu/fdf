@@ -14,12 +14,17 @@
 
 void	draw_line(t_arg *param)
 {
-	float slope;
-	float x;
-	float y;
+	float	slope;
+	float	x;
+	float	y;
+	int		deltax;
+	int		deltay;
+
+	deltax = param->point[1].x - param->point[0].x;
+	deltay = param->point[1].y - param->point[0].y;
 	
-	printf("start: x%f, y%f\n", param->point[0].x, param->point[0].y);
-	printf("end: x%f, y%f\n", param->point[1].x, param->point[1].y);
+	printf("start:\tx0:%f, y0:%f\n", param->point[0].x, param->point[0].y);
+	printf("end:\t\tx1:%f, y1:%f\n", param->point[1].x, param->point[1].y);
 	/* LINE DOWN "SLOPER ERROR" */
 	if (param->point[1].x == param->point[0].x)
 	{
@@ -50,17 +55,17 @@ void	draw_line(t_arg *param)
 			param->point[0].x++;
 		}
 	}
-	/* STEEP LINE - DOES NOT WORK AT ALL*/
+	/* STEEP LINE*/
 	else if (slope > 1)
 	{
 		y = param->point[0].y;
-		slope = 1 / slope; // PROBLEMS, SHADY
-		printf("%f\n", slope);
+		slope = 1 / slope;
+		printf("new slope %f\n", slope);
 
 		while(param->point[0].y < param->point[1].y)
 		{
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, slope * (param->point[0].y - y) + param->point[0].y, param->point[0].x, 255);
-			y++;
+			mlx_pixel_put(param->mlx_ptr, param->win_ptr, slope * (param->point[0].y - y) + param->point[0].x, param->point[0].y, 255);
+			param->point[0].y++;
 		}
 	}
 	printf("%f\n", slope);
@@ -156,7 +161,7 @@ int main()
 	mlw_win = (t_arg*)malloc(sizeof(t_arg*));
 	mlw_win->mlx_ptr = mlx_init();
 	mlw_win->count = 0;
-	mlw_win->win_ptr = mlx_new_window(mlw_win->mlx_ptr, 500, 500, "fdf");
+	mlw_win->win_ptr = mlx_new_window(mlw_win->mlx_ptr, 1200, 800, "fdf_test");
 	mlx_mouse_hook(mlw_win->win_ptr, mouse_bindings, mlw_win);
 	mlx_key_hook(mlw_win->win_ptr, key_bindings, mlw_win);
 	mlx_loop(mlw_win->mlx_ptr);

@@ -13,7 +13,9 @@
 #ifndef _FDF_
 # define _FDF_
 
-# include "/usr/local/include/mlx.h"
+#include "/Users/niimu/Documents/code/fdf/minilibx/mlx.h"
+//# include "/usr/local/include/mlx.h"
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
