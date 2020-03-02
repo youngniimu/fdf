@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include "libft/libft.h"
 
+
 typedef struct		a_list
 {
 	float				y;
