@@ -22,15 +22,21 @@ void	draw_line(t_arg *param)
 
 	deltax = param->point[1].x - param->point[0].x;
 	deltay = param->point[1].y - param->point[0].y;
-	
-	printf("start:\tx0:%f, y0:%f\n", param->point[0].x, param->point[0].y);
-	printf("end:\t\tx1:%f, y1:%f\n", param->point[1].x, param->point[1].y);
+
+	/* printf("start:\tx0:%f, y0:%f\n", param->point[0].x, param->point[0].y);
+	printf("end:\t\tx1:%f, y1:%f\n", param->point[1].x, param->point[1].y); */
+	if (param->point[1].x < param->point[0].x)
+	{
+		ft_vswap(&param->point[1], &param->point[0], sizeof(param->point));
+	}
+	/* printf("start:\tx0:%f, y0:%f\n", param->point[0].x, param->point[0].y);
+	printf("end:\tx1:%f, y1:%f\n", param->point[1].x, param->point[1].y); */
 	/* LINE DOWN "SLOPER ERROR" */
 	if (param->point[1].x == param->point[0].x)
 	{
 		while(param->point[0].y <= param->point[1].y)
 		{
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, param->point[0].x, param->point[0].y, 255);
+			mlx_pixel_put(param->mlx_ptr, param->win_ptr, param->point[0].x, param->point[0].y, 50000);
 			param->point[0].y++;
 		}
 	}
@@ -41,7 +47,7 @@ void	draw_line(t_arg *param)
 		x = param->point[0].x;
 		while(param->point[0].x < param->point[1].x)
 		{
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, param->point[0].x, slope * (param->point[0].x - x) + param->point[0].y, 255);
+			mlx_pixel_put(param->mlx_ptr, param->win_ptr, param->point[0].x, slope * (param->point[0].x - x) + param->point[0].y, 50000);
 			param->point[0].x++;
 		}
 	}
@@ -50,7 +56,7 @@ void	draw_line(t_arg *param)
 	{
 		while(param->point[0].x < param->point[1].x)
 		{
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, param->point[0].x, param->point[0].y, 255);
+			mlx_pixel_put(param->mlx_ptr, param->win_ptr, param->point[0].x, param->point[0].y, 50000);
 			param->point[0].y++;
 			param->point[0].x++;
 		}
@@ -64,7 +70,7 @@ void	draw_line(t_arg *param)
 
 		while(param->point[0].y < param->point[1].y)
 		{
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, slope * (param->point[0].y - y) + param->point[0].x, param->point[0].y, 255);
+			mlx_pixel_put(param->mlx_ptr, param->win_ptr, slope * (param->point[0].y - y) + param->point[0].x, param->point[0].y, 50000);
 			param->point[0].y++;
 		}
 	}
@@ -118,8 +124,8 @@ int	mouse_bindings(int button,int x,int y, t_arg *param)
 		param->point[1].x = 0;
 		param->point[1].y = 0;
 		param->count = 0;
-		printf("button 2: %f, %f\n", param->point[1].x, param->point[1].y);
-	}
+/* 		printf("button 2: %d, %d\n", param->point[1].x, param->point[1].y);
+ */	}
 	else if (button == 1 && param->count == 1)
 	{
 		param->point[1].x = x;

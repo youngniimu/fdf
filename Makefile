@@ -23,8 +23,9 @@ OBJECTS = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME):
+	make -C libft
 	gcc $(FLAGS) -c $(SRC)
-	gcc -o $(NAME) $(OBJECTS) -L /Users/niimu/Documents/code/MinilibX -lmlx -framework OpenGL -framework AppKit
+	gcc -o $(NAME) $(OBJECTS) libft/libft.a -L /Users/niimu/Documents/code/MinilibX -lmlx -framework OpenGL -framework AppKit
 
 clean:
 	@rm -f $(OBJECTS)
