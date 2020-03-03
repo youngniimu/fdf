@@ -13,8 +13,12 @@
 #ifndef _FDF_
 # define _FDF_
 
-#include "/Users/niimu/Documents/code/fdf/minilibx/mlx.h"
-//# include "/usr/local/include/mlx.h"
+//MAKEFILE PATH /Users/niimu/Documents/code/MinilibX
+//#include "/Users/niimu/Documents/code/fdf/minilibx/mlx.h"
+
+//MAKEFILE PATH /usr/local/lib
+# include "/usr/local/include/mlx.h"
+
 
 # include <unistd.h>
 # include <stdlib.h>
