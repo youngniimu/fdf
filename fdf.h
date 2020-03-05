@@ -19,7 +19,7 @@
 //MAKEFILE PATH /usr/local/lib
 # include "/usr/local/include/mlx.h"
 
-
+# include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -42,5 +42,9 @@ typedef struct		f_list
 	int				count;
 }					t_arg;
 
+void	draw_line(t_arg *param);
+int		mouse_bindings(int button,int x,int y, t_arg *param);
+int 	key_bindings(int button, t_arg *param);
+t_point     *read_map(char *file_name);
 
 #endif
