@@ -59,29 +59,34 @@ int key_bindings(int button, t_arg *param)
 	if (button == 123)
 	{
 		param->right += -1;
-		mlx_clear_window (param->mlx_ptr, param->win_ptr);
+		mlx_clear_window(param->mlx_ptr, param->win_ptr);
 		ft_projection_matrix(param);
 	}
 	if (button == 124)
 	{
 		param->right += 1;
-		mlx_clear_window (param->mlx_ptr, param->win_ptr);
+		mlx_clear_window(param->mlx_ptr, param->win_ptr);
 		ft_projection_matrix(param);
 	}
 	if (button == 125)
 	{
 		param->up += 1;
-		mlx_clear_window (param->mlx_ptr, param->win_ptr);
+		mlx_clear_window(param->mlx_ptr, param->win_ptr);
 		ft_projection_matrix(param);
 	}
 	if (button ==126)
 	{
 		param->up += -1;
-		mlx_clear_window (param->mlx_ptr, param->win_ptr);
+		mlx_clear_window(param->mlx_ptr, param->win_ptr);
 		ft_projection_matrix(param);
 	}
 	if (button == 35)
 		ft_projection_matrix(param);
+	if (button == 44)
+	{
+		mlx_clear_window(param->mlx_ptr, param->win_ptr);
+		ft_2d_rotation_matrix(param);
+	}
 	if (button == 49)
 	{
 		param->mouse_click[0].x = 0;

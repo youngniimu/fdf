@@ -14,10 +14,10 @@
 # define _FDF_
 
 //MAKEFILE PATH /Users/niimu/Documents/code/MinilibX
-//#include "/Users/niimu/Documents/code/fdf/minilibx/mlx.h"
+#include "/Users/niimu/Documents/code/fdf/minilibx/mlx.h"
 
 //MAKEFILE PATH /usr/local/lib
-# include "/usr/local/include/mlx.h"
+//# include "/usr/local/include/mlx.h"
 
 # include <fcntl.h>
 # include <math.h>
@@ -65,5 +65,6 @@ int					mouse_bindings(int button,int x,int y, t_arg *param);
 int 				key_bindings(int button, t_arg *param);
 void    			ft_read_map(char *file_name, t_arg **params);
 void    			ft_projection_matrix(t_arg *param);
+void    			ft_2d_rotation_matrix(t_arg *param);
 
 #endif

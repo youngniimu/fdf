@@ -32,6 +32,7 @@ static t_point     **ft_make_map(int fd, t_point **map, size_t rows, size_t colu
             map[countrows][countcolumns].x = countcolumns; 
             map[countrows][countcolumns].y = countrows;
             map[countrows][countcolumns].z = ft_atoi(coords[countcolumns]);
+            free(coords[countcolumns]);
         }
         free(line);
         free(coords);
@@ -61,10 +62,14 @@ void     ft_read_map(char *file_name, t_arg **param)
     rows = 0;
     fd = open(file_name, O_RDONLY);
     while (get_next_line(fd, &line))
+    {
         rows++;
+        free(line);
+    }
     columns = ft_wordcount(line, ' ');
     close(fd);
     (*param)->map = ft_allocate_map(rows, columns);
+    
     fd = open(file_name, O_RDONLY);
     (*param)->map = ft_make_map(fd, (*param)->map, rows, columns);
     close(fd);
