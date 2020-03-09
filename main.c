@@ -14,19 +14,15 @@
 
 int main(int ac, char **av)
 {
-	t_arg *mlw_win;
-	t_point *map;
-
+	t_arg *param;
+	
+	param = (t_arg*)malloc(sizeof(t_arg*));
 	if (ac == 2)
-	{
-		map = read_map(av[1]);
-		mlw_win = (t_arg*)malloc(sizeof(t_arg*));
-		mlw_win->mlx_ptr = mlx_init();
-		mlw_win->count = 0;
-		mlw_win->win_ptr = mlx_new_window(mlw_win->mlx_ptr, 1200, 800, "fdf_test");
-		mlx_mouse_hook(mlw_win->win_ptr, mouse_bindings, mlw_win);
-		mlx_key_hook(mlw_win->win_ptr, key_bindings, mlw_win);
-		mlx_loop(mlw_win->mlx_ptr);
-	}
+		param->map = ft_read_map(av[1]);
+	param->mlx_ptr = mlx_init();
+	param->win_ptr = mlx_new_window(param->mlx_ptr, 1200, 800, "fdf_test");
+	mlx_mouse_hook(param->win_ptr, mouse_bindings, param);
+	mlx_key_hook(param->win_ptr, key_bindings, param);
+	mlx_loop(param->mlx_ptr);
 	return(0);
 }

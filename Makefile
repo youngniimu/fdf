@@ -16,6 +16,7 @@ SRC = \
 		bresenham.c\
 		key_bindings.c\
 		read_map.c\
+		manipulate_map.c
 
 
 LIB = libft

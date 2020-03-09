@@ -14,7 +14,7 @@
 
 
 
-t_point     *make_map(int fd, t_point *map, size_t rows, size_t columns)
+static t_point     *ft_make_map(int fd, t_point *map, size_t rows, size_t columns)
 {
     int      countrows;
     int      countcolumns;
@@ -57,7 +57,7 @@ t_point     *make_map(int fd, t_point *map, size_t rows, size_t columns)
     return(map);
 }
 
-t_point     *read_map(char *file_name)
+t_point     *ft_read_map(char *file_name)
 {
     int     fd;
     t_point *map;
@@ -73,7 +73,7 @@ t_point     *read_map(char *file_name)
     close(fd);
     map = (t_point*)malloc(sizeof(t_point) * rows * columns + 1);
     fd = open(file_name, O_RDONLY);
-    map = make_map(fd, map, rows, columns);
+    map = ft_make_map(fd, map, rows, columns);
     close(fd);
     return (map);
 }

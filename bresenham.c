@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	draw_line(t_arg *param)
+void	ft_bresenham_line(t_arg *param)
 {
 	float	slope;
 	float	x;

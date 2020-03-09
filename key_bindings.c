@@ -28,7 +28,7 @@ int	mouse_bindings(int button,int x,int y, t_arg *param)
 	{
 		param->point[1].x = x;
 		param->point[1].y = y;
-		draw_line(param);
+		ft_bresenham_line(param);
 		param->point[0].x = 0;
 		param->point[0].y = 0;
 		param->point[1].x = 0;
@@ -42,6 +42,8 @@ int	mouse_bindings(int button,int x,int y, t_arg *param)
 int key_bindings(int button, t_arg *param)
 {
 	printf("keyboard button %d\n", button);
+	if (button == 35)
+		ft_draw_map(param);
 	if (button == 49)
 	{
 		param->point[0].x = 0;
@@ -49,10 +51,9 @@ int key_bindings(int button, t_arg *param)
 		param->point[1].x = 0;
 		param->point[1].y = 0;
 		param->count = 0;
-	
 	}
 	if (button == 53)
-       mlx_destroy_window (param->mlx_ptr, param->win_ptr);
+    	mlx_destroy_window (param->mlx_ptr, param->win_ptr);
 	if (button == 8)
 		mlx_clear_window (param->mlx_ptr, param->win_ptr);
 	return(0);
