@@ -16,40 +16,44 @@
 
 t_point     *make_map(int fd, t_point *map, size_t rows, size_t columns)
 {
-    size_t      countrows;
-    size_t      countcolumns;
+    int      countrows;
+    int      countcolumns;
     size_t      count;
     char        *line;
     char        **coords;
 
-    ft_putnbr(rows);
-        ft_putnbr(columns);
-
+    printf("%zu %zu\n", columns, rows);
     count = 0;
     countrows = -1;
-    while (++countrows < rows)
+    while (++countrows < (int)rows)
     {
         countcolumns = -1;
-        ft_putnbr(countrows);
-        ft_putendl("a");
-        ft_putendl("a");
-
         get_next_line(fd, &line);
         coords = ft_strsplit(line, ' ');
-        while (++countcolumns < columns)
+        while (++countcolumns < (int)columns)
         {
-            ft_putnbr(countcolumns);
-            ft_putendl("b");
             map[count].x = countcolumns; 
             map[count].y = countrows;
             map[count].z = ft_atoi(coords[countcolumns]);
-            
+            count++;
         }
         free(line);
         free(coords);
-        
     }
-    
+    countrows = -1;
+    count = 0;
+     while (++countrows < (int)rows)
+    {
+        countcolumns = -1;
+        get_next_line(fd, &line);
+        coords = ft_strsplit(line, ' ');
+        while (++countcolumns < (int)columns)
+        {
+            printf("X %f\tY %f\tZ %f\t\t",map[count].x, map[count].y,  map[count].z);
+            count++;
+        }
+        printf("\n");
+    }
     return(map);
 }
 

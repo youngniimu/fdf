@@ -13,6 +13,9 @@ NAME = fdf
 
 SRC = \
 		main.c \
+		bresenham.c\
+		key_bindings.c\
+		read_map.c\
 
 
 LIB = libft

@@ -31,7 +31,7 @@ typedef struct		a_list
 	float				y;
 	float				x;
 	float				z;
-	float				colour;
+	int					colour;
 }					t_point;
 
 typedef struct		f_list
