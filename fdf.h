@@ -20,10 +20,22 @@
 # include "/usr/local/include/mlx.h"
 
 # include <fcntl.h>
+# include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include "libft/libft.h"
+
+# define MAX_X 1200
+# define MAX_Y 800
+# define SCALE 10
+
+typedef struct		p_list
+{
+	float			y;
+	float			x;
+	int				colour;
+}					k_point;
 
 typedef struct		a_list
 {
@@ -47,10 +59,11 @@ typedef struct		f_list
 	int				up;
 }					t_arg;
 
-void				ft_bresenham_map(t_arg *param);
-void				ft_bresenham_line(t_arg *param, t_point start, t_point end, int action);
+void				ft_bresenham_map(k_point **projection, t_arg *param);
+void				ft_bresenham_line(t_arg *param, k_point start, k_point end, int action);
 int					mouse_bindings(int button,int x,int y, t_arg *param);
 int 				key_bindings(int button, t_arg *param);
 void    			ft_read_map(char *file_name, t_arg **params);
+void    			ft_projection_matrix(t_arg *param);
 
 #endif

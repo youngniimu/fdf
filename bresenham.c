@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void        ft_bresenham_map(t_arg *param)
+void        ft_bresenham_map(k_point **projection, t_arg *param)
 {
     int     i;
     int     j;
@@ -24,14 +24,14 @@ void        ft_bresenham_map(t_arg *param)
         while(++j < (int)param->columns)
         {
             if (j + 1 < (int)param->columns)
-                ft_bresenham_line(param, param->map[i][j], param->map[i][j + 1], 1);
+                ft_bresenham_line(param, projection[i][j], projection[i][j + 1], 1);
             if (i + 1 < (int)param->rows)
-                ft_bresenham_line(param, param->map[i][j], param->map[i + 1][j], 1);   
+                ft_bresenham_line(param, projection[i][j], projection[i + 1][j], 1);   
         }
     }
 }
 
-void	ft_bresenham_line(t_arg *param, t_point start, t_point end, int action)
+void	ft_bresenham_line(t_arg *param, k_point start, k_point end, int action)
 {
 	float	slope;
 	float	x;

@@ -39,7 +39,7 @@ static t_point     **ft_make_map(int fd, t_point **map, size_t rows, size_t colu
     return(map);
 }
 
-t_point     **ft_allocate_map(size_t rows, size_t columns)
+static t_point     **ft_allocate_map(size_t rows, size_t columns)
 {
     t_point **map;
     int     count;
