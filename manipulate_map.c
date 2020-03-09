@@ -12,7 +12,3 @@
 
 #include "fdf.h"
 
-void        ft_draw_map(t_arg *param)
-{
-    free(param);
-}

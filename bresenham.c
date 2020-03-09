@@ -12,7 +12,26 @@
 
 #include "fdf.h"
 
-void	ft_bresenham_line(t_arg *param, t_point start, t_point end)
+void        ft_bresenham_map(t_arg *param)
+{
+    int     i;
+    int     j;
+
+    i = -1;
+    while(++i < (int)param->rows)
+    {     
+        j = -1;
+        while(++j < (int)param->columns)
+        {
+            if (j + 1 < (int)param->columns)
+                ft_bresenham_line(param, param->map[i][j], param->map[i][j + 1], 1);
+            if (i + 1 < (int)param->rows)
+                ft_bresenham_line(param, param->map[i][j], param->map[i + 1][j], 1);   
+        }
+    }
+}
+
+void	ft_bresenham_line(t_arg *param, t_point start, t_point end, int action)
 {
 	float	slope;
 	float	x;
@@ -20,11 +39,23 @@ void	ft_bresenham_line(t_arg *param, t_point start, t_point end)
 	float	deltax;
 	float	deltay;
 
+	/* printf("scale:\t%d\n", param->scale); */
+	if (action == 1)
+	{
+		start.x += param->right;
+		start.y += param->up;
+		end.x += param->right;
+		end.y += param->up;
+		start.x *= param->scale;
+		start.y *= param->scale;
+		end.x *= param->scale;
+		end.y *= param->scale;
+	}
 	deltax = end.x - start.x;
 	deltay = end.y - start.y;
-
+/* 
 	printf("start:\tx0:%f, y0:%f\n", start.x, start.y);
-	printf("end:\tx1:%f, y1:%f\n", end.x, end.y);
+	printf("end:\tx1:%f, y1:%f\n", end.x, end.y); */
 
 	if (deltax < 0)
 		ft_vswap(&end, &start, sizeof(t_point));
@@ -33,7 +64,7 @@ void	ft_bresenham_line(t_arg *param, t_point start, t_point end)
 		while(start.y++ <= end.y)
 			mlx_pixel_put(param->mlx_ptr, param->win_ptr, start.x, start.y, 50000);
 	slope = deltay/deltax;
-	printf("%f\n", slope);
+	/* printf("slope: %f\n", slope); */
 
 	/* GENTLE LINE */
 	if (slope < 1 && slope > -1)
@@ -57,12 +88,12 @@ void	ft_bresenham_line(t_arg *param, t_point start, t_point end)
 	{
 		y = start.y;
 		slope = 1 / slope;
-		printf("new slope %f\n", slope);
-		printf("y here:\ty0:%f, y1:%f\n", y, end.y);
+		/* printf("new slope %f\n", slope); */
 		if (slope < 0)
 			ft_vswap(&y, &end.y, sizeof(float));
 		while(y++ < end.y)
 			mlx_pixel_put(param->mlx_ptr, param->win_ptr, slope * (y - start.y) + start.x, y, 50000);
 	}
+	/* printf("\n"); */
 }
 

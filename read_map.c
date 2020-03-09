@@ -16,12 +16,11 @@
 
 static t_point     **ft_make_map(int fd, t_point **map, size_t rows, size_t columns)
 {
-    int      countrows;
-    int      countcolumns;
+    int         countrows;
+    int         countcolumns;
     char        *line;
     char        **coords;
 
-    printf("%zu %zu\n", columns, rows);
     countrows = -1;
     while (++countrows < (int)rows)
     {
@@ -36,14 +35,6 @@ static t_point     **ft_make_map(int fd, t_point **map, size_t rows, size_t colu
         }
         free(line);
         free(coords);
-    }
-    countrows = -1;
-     while (++countrows < (int)rows)
-    {
-        countcolumns = -1;
-        while (++countcolumns < (int)columns)
-            printf("X %f\tY %f\tZ %f\t\t",map[countrows][countcolumns].x, map[countrows][countcolumns].y,  map[countrows][countcolumns].z);
-        printf("\n");
     }
     return(map);
 }
@@ -60,10 +51,9 @@ t_point     **ft_allocate_map(size_t rows, size_t columns)
     return(map);
 }
 
-t_point     **ft_read_map(char *file_name)
+void     ft_read_map(char *file_name, t_arg **param)
 {
     int     fd;
-    t_point **map;
     char    *line;
     size_t  rows;
     size_t  columns;
@@ -74,9 +64,30 @@ t_point     **ft_read_map(char *file_name)
         rows++;
     columns = ft_wordcount(line, ' ');
     close(fd);
-    map = ft_allocate_map(rows, columns);
+    (*param)->map = ft_allocate_map(rows, columns);
     fd = open(file_name, O_RDONLY);
-    map = ft_make_map(fd, map, rows, columns);
+    (*param)->map = ft_make_map(fd, (*param)->map, rows, columns);
     close(fd);
-    return (map);
+    (*param)->rows = rows;
+    (*param)->columns = columns;
+/* 
+
+
+
+    int countcolumns = 0;
+    int countrows = -1;
+    while (++countrows < (int)rows)
+    {
+        countcolumns = -1;
+        while (++countcolumns < (int)columns)
+            printf("X %f\tY %f\tZ %f\t\t",(*param)->map[countrows][countcolumns].x, (*param)->map[countrows][countcolumns].y,  (*param)->map[countrows][countcolumns].z);
+        printf("\n");
+    }
+    printf("MAP READY\n\n");
+
+
+
+
+ */
+    /* return (map); */
 }
