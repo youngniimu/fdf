@@ -12,15 +12,14 @@
 
 #include "fdf.h"
 
-
-
-static t_point     **ft_make_map(int fd, t_point **map, size_t rows, size_t columns)
+static t_point     **ft_make_map(int fd, t_point **map, int rows, int columns)
 {
     int         countrows;
     int         countcolumns;
     char        *line;
     char        **coords;
 
+    printf("%d %d\n", rows, columns);
     countrows = -1;
     while (++countrows < (int)rows)
     {
@@ -29,8 +28,8 @@ static t_point     **ft_make_map(int fd, t_point **map, size_t rows, size_t colu
         coords = ft_strsplit(line, ' ');
         while (++countcolumns < (int)columns)
         {
-            map[countrows][countcolumns].x = countcolumns; 
-            map[countrows][countcolumns].y = countrows;
+            map[countrows][countcolumns].x = countcolumns - (columns / 2); 
+            map[countrows][countcolumns].y = countrows - (rows / 2);
             map[countrows][countcolumns].z = ft_atoi(coords[countcolumns]);
             free(coords[countcolumns]);
         }
@@ -40,7 +39,7 @@ static t_point     **ft_make_map(int fd, t_point **map, size_t rows, size_t colu
     return(map);
 }
 
-static t_point     **ft_allocate_map(size_t rows, size_t columns)
+static t_point     **ft_allocate_map(int rows, int columns)
 {
     t_point **map;
     int     count;
@@ -56,8 +55,8 @@ void     ft_read_map(char *file_name, t_arg **param)
 {
     int     fd;
     char    *line;
-    size_t  rows;
-    size_t  columns;
+    int  rows;
+    int  columns;
     
     rows = 0;
     fd = open(file_name, O_RDONLY);
@@ -75,24 +74,4 @@ void     ft_read_map(char *file_name, t_arg **param)
     close(fd);
     (*param)->rows = rows;
     (*param)->columns = columns;
-/* 
-
-
-
-    int countcolumns = 0;
-    int countrows = -1;
-    while (++countrows < (int)rows)
-    {
-        countcolumns = -1;
-        while (++countcolumns < (int)columns)
-            printf("X %f\tY %f\tZ %f\t\t",(*param)->map[countrows][countcolumns].x, (*param)->map[countrows][countcolumns].y,  (*param)->map[countrows][countcolumns].z);
-        printf("\n");
-    }
-    printf("MAP READY\n\n");
-
-
-
-
- */
-    /* return (map); */
 }

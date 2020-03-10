@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void        ft_bresenham_map(k_point **projection, t_arg *param)
+void        ft_bresenham_map(t_point **projection, t_arg *param)
 {
     int     i;
     int     j;
@@ -31,7 +31,7 @@ void        ft_bresenham_map(k_point **projection, t_arg *param)
     }
 }
 
-void	ft_bresenham_line(t_arg *param, k_point start, k_point end, int action)
+void	ft_bresenham_line(t_arg *param, t_point start, t_point end, int action)
 {
 	float	slope;
 	float	x;
@@ -53,6 +53,11 @@ void	ft_bresenham_line(t_arg *param, k_point start, k_point end, int action)
 	}
 	deltax = end.x - start.x;
 	deltay = end.y - start.y;
+	start.x += (MAX_X / 2);
+	end.x += (MAX_X / 2);
+	start.y += (MAX_Y / 2);
+	end.y += (MAX_Y / 2);
+
 /* 
 	printf("start:\tx0:%f, y0:%f\n", start.x, start.y);
 	printf("end:\tx1:%f, y1:%f\n", end.x, end.y); */
