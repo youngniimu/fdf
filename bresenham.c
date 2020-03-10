@@ -67,7 +67,7 @@ void	ft_bresenham_line(t_arg *param, t_point start, t_point end, int action)
 	/* LINE DOWN "SLOPER ERROR" */
 	if (end.x == start.x)
 		while(start.y++ <= end.y)
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, start.x, start.y, 50000);
+			mlx_pixel_put(param->mlx_ptr, param->win_ptr, start.x, start.y, 0xE5CCFF);
 	slope = deltay/deltax;
 	/* printf("slope: %f\n", slope); */
 
@@ -76,14 +76,14 @@ void	ft_bresenham_line(t_arg *param, t_point start, t_point end, int action)
 	{
 		x = start.x;
 		while(x++ < end.x)
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, x, slope * (x - start.x) + start.y, 50000);
+			mlx_pixel_put(param->mlx_ptr, param->win_ptr, x, slope * (x - start.x) + start.y, 0xE5CCFF);
 	}
 	/* SLOPE 1 LINE */
 	else if (slope == 1 || slope == -1)
 	{
 		while(start.x < end.x)
 		{
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, start.x, start.y, 50000);
+			mlx_pixel_put(param->mlx_ptr, param->win_ptr, start.x, start.y, 0xE5CCFF);
 			start.y++;
 			start.x++;
 		}
@@ -97,7 +97,7 @@ void	ft_bresenham_line(t_arg *param, t_point start, t_point end, int action)
 		if (slope < 0)
 			ft_vswap(&y, &end.y, sizeof(float));
 		while(y++ < end.y)
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, slope * (y - start.y) + start.x, y, 50000);
+			mlx_pixel_put(param->mlx_ptr, param->win_ptr, slope * (y - start.y) + start.x, y, 0xE5CCFF);
 	}
 	/* printf("\n"); */
 }
