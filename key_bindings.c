@@ -26,7 +26,7 @@ int			mouse_bindings(int button, int x, int y, t_arg *param)
 	return (0);
 }
 
-static void	fggft_handle_move(t_arg *param, int button)
+static void	ft_handle_move(t_arg *param, int button)
 {
 	if (button <= 124)
 		param->right += button == 123 ? -MOVE : MOVE;
