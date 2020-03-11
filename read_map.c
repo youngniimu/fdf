@@ -29,7 +29,7 @@ static t_point	**ft_make_map(int fd, t_point **map, int rows, int columns)
 		{
 			map[countrows][countcolumns].x = countcolumns - (columns / 2);
 			map[countrows][countcolumns].y = countrows - (rows / 2);
-			map[countrows][countcolumns].z = ft_atoi(coords[countcolumns]);
+			map[countrows][countcolumns].z = -ft_atoi(coords[countcolumns]);
 			free(coords[countcolumns]);
 		}
 		free(line);
@@ -61,10 +61,11 @@ void			ft_read_map(char *file_name, t_arg **param)
 	fd = open(file_name, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
+		if (rows == 0)
+			columns = ft_wordcount(line, ' ');
 		rows++;
 		free(line);
 	}
-	columns = ft_wordcount(line, ' ');
 	close(fd);
 	(*param)->map = ft_allocate_map(rows, columns);
 	fd = open(file_name, O_RDONLY);

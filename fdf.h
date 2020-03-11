@@ -29,7 +29,7 @@
 # define MAX_X 1200
 # define MAX_Y 800
 # define MOVE 2
-# define ANGLE 0.1
+# define ANGLE 0.05
 # define COLOUR 50000
 
 typedef struct		a_list
