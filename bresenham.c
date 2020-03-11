@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-static void ft_handle_origo_move_zoom(t_arg *param, t_point *start, t_point *end)
+static void		ft_handle_start(t_arg *param, t_point *start, t_point *end)
 {
 	(*start).x += param->right;
 	(*start).y += param->up;
@@ -28,43 +28,43 @@ static void ft_handle_origo_move_zoom(t_arg *param, t_point *start, t_point *end
 	(*end).y += (MAX_Y / 2);
 }
 
-void		ft_bresenham_line(t_arg *param, t_point start, t_point end)
+void			ft_bresenham_line(t_arg *param, t_point start, t_point end)
 {
-	float	slope;
-	float	deltax;
-	float	deltay;
+	float		slope;
+	float		deltax;
+	float		deltay;
 
-	ft_handle_origo_move_zoom(param, &start, &end);
+	ft_handle_start(param, &start, &end);
 	deltax = end.x - start.x;
 	deltay = end.y - start.y;
-	slope = deltay/deltax;
+	slope = deltay / deltax;
 	if (deltax < 0)
 		ft_vswap(&end, &start, sizeof(t_point));
 	if (end.x == start.x)
 		ft_line_down(param, start, end);
 	if (slope < 1 && slope > -1)
-		ft_gentle_line(param, start, end, slope);
+		ft_gentle(param, start, end, slope);
 	else if (slope == 1 || slope == -1)
 		ft_line_diagonal(param, start, end);
 	else if (slope > 1 || slope < -1)
-		ft_steep_line(param, start, end, slope);
+		ft_steep(param, start, end, slope);
 }
 
-void        ft_bresenham_map(t_point **projection, t_arg *param)
+void			ft_bresenham_map(t_point **map, t_arg *param)
 {
-    int     i;
-    int     j;
+	int			i;
+	int			j;
 
-    i = -1;
-    while(++i < (int)param->rows)
-    {     
-        j = -1;
-        while(++j < (int)param->columns)
-        {
-            if (j + 1 < (int)param->columns)
-                ft_bresenham_line(param, projection[i][j], projection[i][j + 1]);
-            if (i + 1 < (int)param->rows)
-                ft_bresenham_line(param, projection[i][j], projection[i + 1][j]);   
-        }
-    }
+	i = -1;
+	while (++i < (int)param->rows)
+	{
+		j = -1;
+		while (++j < (int)param->columns)
+		{
+			if (j + 1 < (int)param->columns)
+				ft_bresenham_line(param, map[i][j], map[i][j + 1]);
+			if (i + 1 < (int)param->rows)
+				ft_bresenham_line(param, map[i][j], map[i + 1][j]);
+		}
+	}
 }

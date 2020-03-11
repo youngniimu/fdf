@@ -44,4 +44,4 @@ cleandup:
 	@find . -type f -name '*~' -exec rm -rf {} \;
 
 norme:
-	@norminette $(SRC)%
+	@norminette $(SRC)
