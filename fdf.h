@@ -32,14 +32,6 @@
 # define ANGLE 0.1
 # define COLOUR 50000
 
-
-typedef struct		p_list
-{
-	float			y;
-	float			x;
-	int				colour;
-}					k_point;
-
 typedef struct		a_list
 {
 	float			y;
@@ -59,16 +51,18 @@ typedef struct		f_list
 	int				scale;
 	int 			right;
 	int				up;
-/* 	t_point			mouse_click[2];
-	int				mouse_click_count; */
 }					t_arg;
 
 void				ft_bresenham_map(t_point **projection, t_arg *param);
-void				ft_bresenham_line(t_arg *param, t_point start, t_point end, int action);
-int					mouse_bindings(int button,int x,int y, t_arg *param);
-int 				key_bindings(int button, t_arg *param);
+void				ft_bresenham_line(t_arg *param, t_point start, t_point end);
 void    			ft_read_map(char *file_name, t_arg **params);
 void    			ft_projection_matrix(t_arg *param, char rotation);
-void    			ft_2d_rotation_matrix(t_arg *param);
+void		ft_line_down(t_arg *param, t_point start, t_point end);
+void		ft_gentle_line(t_arg *param, t_point start, t_point end, float slope);
+void		ft_steep_line(t_arg *param, t_point start, t_point end, float slope);
+void		ft_line_diagonal(t_arg *param, t_point start, t_point end);
+
+int					mouse_bindings(int button,int x,int y, t_arg *param);
+int 				key_bindings(int button, t_arg *param);
 
 #endif

@@ -14,6 +14,7 @@ NAME = fdf
 SRC = \
 		main.c \
 		bresenham.c\
+		bresenham2.c\
 		key_bindings.c\
 		read_map.c\
 		manipulate_map.c

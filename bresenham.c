@@ -12,6 +12,44 @@
 
 #include "fdf.h"
 
+static void ft_handle_origo_move_zoom(t_arg *param, t_point *start, t_point *end)
+{
+	(*start).x += param->right;
+	(*start).y += param->up;
+	(*end).x += param->right;
+	(*end).y += param->up;
+	(*start).x *= param->scale;
+	(*start).y *= param->scale;
+	(*end).x *= param->scale;
+	(*end).y *= param->scale;
+	(*start).x += (MAX_X / 2);
+	(*end).x += (MAX_X / 2);
+	(*start).y += (MAX_Y / 2);
+	(*end).y += (MAX_Y / 2);
+}
+
+void		ft_bresenham_line(t_arg *param, t_point start, t_point end)
+{
+	float	slope;
+	float	deltax;
+	float	deltay;
+
+	ft_handle_origo_move_zoom(param, &start, &end);
+	deltax = end.x - start.x;
+	deltay = end.y - start.y;
+	slope = deltay/deltax;
+	if (deltax < 0)
+		ft_vswap(&end, &start, sizeof(t_point));
+	if (end.x == start.x)
+		ft_line_down(param, start, end);
+	if (slope < 1 && slope > -1)
+		ft_gentle_line(param, start, end, slope);
+	else if (slope == 1 || slope == -1)
+		ft_line_diagonal(param, start, end);
+	else if (slope > 1 || slope < -1)
+		ft_steep_line(param, start, end, slope);
+}
+
 void        ft_bresenham_map(t_point **projection, t_arg *param)
 {
     int     i;
@@ -24,81 +62,9 @@ void        ft_bresenham_map(t_point **projection, t_arg *param)
         while(++j < (int)param->columns)
         {
             if (j + 1 < (int)param->columns)
-                ft_bresenham_line(param, projection[i][j], projection[i][j + 1], 1);
+                ft_bresenham_line(param, projection[i][j], projection[i][j + 1]);
             if (i + 1 < (int)param->rows)
-                ft_bresenham_line(param, projection[i][j], projection[i + 1][j], 1);   
+                ft_bresenham_line(param, projection[i][j], projection[i + 1][j]);   
         }
     }
 }
-
-void	ft_bresenham_line(t_arg *param, t_point start, t_point end, int action)
-{
-	float	slope;
-	float	x;
-	float	y;
-	float	deltax;
-	float	deltay;
-
-	/* printf("scale:\t%d\n", param->scale); */
-	if (action == 1)
-	{
-		start.x += param->right;
-		start.y += param->up;
-		end.x += param->right;
-		end.y += param->up;
-		start.x *= param->scale;
-		start.y *= param->scale;
-		end.x *= param->scale;
-		end.y *= param->scale;
-	}
-	deltax = end.x - start.x;
-	deltay = end.y - start.y;
-	start.x += (MAX_X / 2);
-	end.x += (MAX_X / 2);
-	start.y += (MAX_Y / 2);
-	end.y += (MAX_Y / 2);
-
-/* 
-	printf("start:\tx0:%f, y0:%f\n", start.x, start.y);
-	printf("end:\tx1:%f, y1:%f\n", end.x, end.y); */
-
-	if (deltax < 0)
-		ft_vswap(&end, &start, sizeof(t_point));
-	/* LINE DOWN "SLOPER ERROR" */
-	if (end.x == start.x)
-		while(start.y++ <= end.y)
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, start.x, start.y, 0xE5CCFF);
-	slope = deltay/deltax;
-	/* printf("slope: %f\n", slope); */
-
-	/* GENTLE LINE */
-	if (slope < 1 && slope > -1)
-	{
-		x = start.x;
-		while(x++ < end.x)
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, x, slope * (x - start.x) + start.y, 0xE5CCFF);
-	}
-	/* SLOPE 1 LINE */
-	else if (slope == 1 || slope == -1)
-	{
-		while(start.x < end.x)
-		{
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, start.x, start.y, 0xE5CCFF);
-			start.y++;
-			start.x++;
-		}
-	}
-	/* STEEP LINE*/
-	else if (slope > 1 || slope < -1)
-	{
-		y = start.y;
-		slope = 1 / slope;
-		/* printf("new slope %f\n", slope); */
-		if (slope < 0)
-			ft_vswap(&y, &end.y, sizeof(float));
-		while(y++ < end.y)
-			mlx_pixel_put(param->mlx_ptr, param->win_ptr, slope * (y - start.y) + start.x, y, 0xE5CCFF);
-	}
-	/* printf("\n"); */
-}
-
