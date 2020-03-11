@@ -21,7 +21,7 @@ static void		ft_rotation_matrix(t_arg *param, float *i, float *j)
 	*j = *j * cos(param->angle * ANGLE) + temp * sin(param->angle * ANGLE);
 }
 
-void			ft_projection_matrix(t_arg *param, char rotation)
+void			ft_projection_matrix(t_arg *param)
 {
 	int			x;
 	int			y;
@@ -32,13 +32,13 @@ void			ft_projection_matrix(t_arg *param, char rotation)
 		x = -1;
 		while (++x < (int)param->columns)
 		{
-			if (rotation == 'x')
+			if (param->axis == 'x')
 				ft_rotation_matrix(param, &param->map[y][x].y,
 				&param->map[y][x].z);
-			if (rotation == 'y')
+			if (param->axis == 'y')
 				ft_rotation_matrix(param, &param->map[y][x].x,
 				&param->map[y][x].z);
-			if (rotation == 'z')
+			if (param->axis == 'z')
 				ft_rotation_matrix(param, &param->map[y][x].x,
 				&param->map[y][x].y);
 		}

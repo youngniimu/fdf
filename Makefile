@@ -17,8 +17,8 @@ SRC = \
 		bresenham2.c\
 		key_bindings.c\
 		read_map.c\
-		manipulate_map.c
-
+		manipulate_map.c\
+		render.c
 
 LIB = libft
 FLAGS = -Wall -Wextra -Werror

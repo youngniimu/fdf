@@ -30,8 +30,6 @@ int			main(int ac, char **av)
 	ft_initialize_values(&param);
 	param->mlx_ptr = mlx_init();
 	param->win_ptr = mlx_new_window(param->mlx_ptr, MAX_X, MAX_Y, "fdf_test");
-	mlx_mouse_hook(param->win_ptr, mouse_bindings, param);
-	mlx_key_hook(param->win_ptr, key_bindings, param);
-	mlx_loop(param->mlx_ptr);
+	ft_listen(param);
 	return (0);
 }

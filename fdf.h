@@ -51,16 +51,19 @@ typedef struct		f_list
 	int				scale;
 	int 			right;
 	int				up;
+	char			axis;
 }					t_arg;
 
 void				ft_bresenham_map(t_point **projection, t_arg *param);
 void				ft_bresenham_line(t_arg *param, t_point start, t_point end);
 void    			ft_read_map(char *file_name, t_arg **params);
-void    			ft_projection_matrix(t_arg *param, char rotation);
+void    			ft_projection_matrix(t_arg *param);
 void				ft_line_down(t_arg *param, t_point start, t_point end);
 void				ft_gentle(t_arg *param, t_point start, t_point end, float slope);
 void				ft_steep(t_arg *param, t_point start, t_point end, float slope);
 void				ft_line_diagonal(t_arg *param, t_point start, t_point end);
+void    			ft_listen(t_arg *param);
+void    			ft_render(t_arg *param);
 
 int					mouse_bindings(int button,int x,int y, t_arg *param);
 int 				key_bindings(int button, t_arg *param);
